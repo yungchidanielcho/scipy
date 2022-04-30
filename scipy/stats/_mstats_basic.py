@@ -1143,6 +1143,30 @@ def siegelslopes(y, x=None, method="hierarchical"):
 
 
 def sen_seasonal_slopes(x):
+    """Returns seasonal Sen's slope
+
+    Calculate Sen's slope using the formula:
+    .. math::  d[ijk] = (x[ij] - x[ik]) / (j - k)
+
+    for each (x[ij], x[ik]) pair i = 1, …, m, where (1 ≤q k < j ≤q n_i and n[i] is the number of known values in the i-th season. The seasonal slope estimator is the median of the d[ijk] values.
+
+    Parameters
+        x : array_like
+            a list of slope
+
+    Returns
+    ----------
+        szn_medslopes: list
+           seasonalized slope
+        medslope: float
+           median of seasonalized slope
+
+    See Also
+    ---------
+    [Ref] Hipel, K.W. and McLeod, A.I. (1994), Time Series Modelling of Water Resources and Environmental Systems. New York: Elsevier Science.
+    [Ref] Hirsch, R., J. Slack, R. Smith (1982), T echniques of Trend Analysis for Monthly Water Quality Data. Water Resources Research 18, 107-121.
+    [Ref] Sen, P.K. (1968), Estimates of the regression coefficient based on Kendall's tau, Journal of the American Statistical Association 63, 1379–1389.
+    """
     x = ma.array(x, subok=True, copy=False, ndmin=2)
     (n,_) = x.shape
     # Get list of slopes per season
